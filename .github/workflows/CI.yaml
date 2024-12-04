@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  lint-and-test:
+  lint-test-build:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +31,7 @@ jobs:
       # Run ESLint for code linting
       - name: Lint code with ESLint
         run: npm run lint
+
+      # Build the project
+      - name: Build project
+        run: npm run build
