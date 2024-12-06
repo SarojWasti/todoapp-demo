@@ -7,12 +7,6 @@ on:
   pull_request:
     branches:
       - master
-  workflow_dispatch:
-    inputs:
-      status:
-        description: 'Jenkins build status (success/failure)'
-        required: true
-        type: string
 
 jobs:
   lint-and-test:
@@ -20,25 +14,24 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "20.17.0"
-
+      
       - name: Install dependencies
         run: npm install
-
+      
       - name: Run ESLint
         run: npm run lint
-
+      
       - name: Run tests
         run: npm test --if-present
 
   build-and-push-docker:
-    needs: lint-and-test
+    needs: lint-and-test # Run this job only if the previous one passes
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.status == 'success' }}  # Only run this if Jenkins build is successful
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -59,13 +52,3 @@ jobs:
       - name: Push Docker image
         run: |
           docker push wostez/todo-app:latest
-          
-      - name: Docker image pushed to Docker Hub
-        run: echo "Docker image pushed to Docker Hub successfully!"
-
-  failure-message:
-    if: ${{ github.event.inputs.status != 'success' }}  # Show failure message if Jenkins build failed
-    runs-on: ubuntu-latest
-    steps:
-      - name: Build failed
-        run: echo "Jenkins build failed. Docker image will not be pushed."
