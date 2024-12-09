@@ -19,7 +19,7 @@ const Todo = () => {
     //set the array by updating it without the index of the given item
     setItems((prevItems) => prevItems.filter((_, index) => index !== itemDel));
   };
-  return (
+  return 
     <div>
       <h1>TodoList DevOps : Auto Deploymeent - Test Jenkins</h1>
       <div className="inputDiv">
