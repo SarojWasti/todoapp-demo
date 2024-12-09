@@ -21,7 +21,7 @@ const Todo = () => {
   };
   return (
     <div>
-      <h1>TodoList DevOps : Auto Deploymeent for Kubernetes Class Test</h1>
+      <h1>TodoList DevOps : Auto Deploymeent - Test Jenkins</h1>
       <div className="inputDiv">
         <input
           value={value}
