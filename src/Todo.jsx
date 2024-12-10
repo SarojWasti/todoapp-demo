@@ -21,7 +21,7 @@ const Todo = () => {
   };
   return (
     <div>
-      <h1>TodoList DevOps</h1>
+      <h1>TodoList DevOps: Deployed</h1>
       <div className="inputDiv">
         <input
           value={value}
